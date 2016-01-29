@@ -1,0 +1,20 @@
+{
+  "name": "grocerysms",
+  "version": "1.0.0",
+  "description": "SMS based grocery list manager",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "twilio": "^2.8.0"
+  },
+  "engines": {
+    "node": "4.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wang-dawei/grocerysms.git"
+  },
+  "license" : "MIT"
+}
