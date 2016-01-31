@@ -29,15 +29,11 @@ var server = http.createServer(function (req,res) {
 
   else if (parsedURL.pathname == '/sms') {
     //Handle incoming text messages
-    req.setEncoding('utf8');
-    var textIn = req.Body;
-    client.messages.create({ 
-      to: '+12144032374', 
-      from: '+19723705159', 
-      body: 'GrocerySMS',  
-    }, function(err, message) { 
-      console.log(message.sid); 
-    });
+    res.write('<?xml version="1.0" encoding="UTF-8" ?>');
+    res.write('<Response>');
+    res.write('<Message>This is message 1 of 2.</Message>');
+    res.write('<Message>This is message 2 of 2.</Message>');
+    res.write('</Response>');
     res.end();
   }
 
