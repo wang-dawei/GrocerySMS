@@ -30,7 +30,7 @@ var server = http.createServer(function (req,res) {
   else if (parsedURL.pathname == '/sms') {
     //Handle incoming text messages
     req.setEncoding('utf8');
-    var textIn = req.body
+    var textIn = req.Body;
     client.messages.create({ 
       to: "+12144032374", 
       from: "+19723705159", 
@@ -38,7 +38,7 @@ var server = http.createServer(function (req,res) {
     }, function(err, message) { 
       console.log(message.sid); 
     });
-    res.end()
+    res.end();
   }
 
   else {
