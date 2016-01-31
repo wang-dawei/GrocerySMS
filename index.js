@@ -35,12 +35,12 @@ var server = http.createServer(function (req,res) {
       res.writeHead(200, {'Content-Type': 'text/xml'});
       res.write('<?xml version="1.0" encoding="UTF-8" ?>');
       res.write('<Response>');
-      res.write('<Message>' + string + '</Message>');
+      res.write('<Message> Your message is: ' + string + '</Message>');
       res.write('</Response>');
       res.end();
     }
 
-    req.on('Body', replyText(Body));
+    req.on('body', replyText(body));
   }
 
   else {
