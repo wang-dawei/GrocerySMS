@@ -29,6 +29,7 @@ var server = http.createServer(function (req,res) {
 
   else if (parsedURL.pathname == '/sms') {
     //Handle incoming text messages
+    res.writeHead(200, {'Content-Type': 'text/xml'});
     res.write('<?xml version="1.0" encoding="UTF-8" ?>');
     res.write('<Response>');
     res.write('<Message>This is message 1 of 2.</Message>');
@@ -45,4 +46,3 @@ var server = http.createServer(function (req,res) {
 }); 
 
 server.listen(process.env.PORT)
-console.log('Server is listening at port ' + process.env.PORT)
