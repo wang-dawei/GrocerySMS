@@ -31,16 +31,18 @@ var server = http.createServer(function (req,res) {
     //Handle incoming text messages
     req.setEncoding('utf8')
 
-    var replyText = function (string) {
+    req.on('data', function() {
+      var tempStr = data.toString();
+
       res.writeHead(200, {'Content-Type': 'text/xml'});
       res.write('<?xml version="1.0" encoding="UTF-8" ?>');
       res.write('<Response>');
-      res.write('<Message> Your message is: ' + string + '</Message>');
+      res.write('<Message> Your message is: ' + tempStr + '</Message>');
       res.write('</Response>');
       res.end();
-    }
+    })
 
-    req.on('body', replyText(body));
+
   }
 
   else {
