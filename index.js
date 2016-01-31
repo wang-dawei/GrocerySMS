@@ -32,9 +32,9 @@ var server = http.createServer(function (req,res) {
     req.setEncoding('utf8');
     var textIn = req.Body;
     client.messages.create({ 
-      to: "+12144032374", 
-      from: "+19723705159", 
-      body: textIn,  
+      to: '+12144032374', 
+      from: '+19723705159', 
+      body: 'GrocerySMS',  
     }, function(err, message) { 
       console.log(message.sid); 
     });
