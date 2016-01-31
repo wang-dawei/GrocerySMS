@@ -32,7 +32,7 @@ var server = http.createServer(function (req,res) {
     req.setEncoding('utf8')
 
     req.on('data', function() {
-      var tempStr = data.toString();
+      var tempStr = data['body'].toString();
 
       res.writeHead(200, {'Content-Type': 'text/xml'});
       res.write('<?xml version="1.0" encoding="UTF-8" ?>');
