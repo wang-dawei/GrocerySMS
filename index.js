@@ -29,13 +29,18 @@ var server = http.createServer(function (req,res) {
 
   else if (parsedURL.pathname == '/sms') {
     //Handle incoming text messages
-    var textIn = req.Body;
-    res.writeHead(200, {'Content-Type': 'text/xml'});
-    res.write('<?xml version="1.0" encoding="UTF-8" ?>');
-    res.write('<Response>');
-    res.write('<Message>' + textIn + '</Message>');
-    res.write('</Response>');
-    res.end();
+    req.setEncoding('utf8')
+
+    var replyText = function (string) {
+      res.writeHead(200, {'Content-Type': 'text/xml'});
+      res.write('<?xml version="1.0" encoding="UTF-8" ?>');
+      res.write('<Response>');
+      res.write('<Message>' + string + '</Message>');
+      res.write('</Response>');
+      res.end();
+    }
+
+    req.on('Body', replyText(Body));
   }
 
   else {
