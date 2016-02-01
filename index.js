@@ -46,15 +46,16 @@ var server = http.createServer(function (req,res) {
 
     req.on('end', function() {
       var requestObject = qs.parse(tempStr);
-      var phoneNumber = requestObject.From;
-      var textArray = requestObject.Body.split(' ');
-      var outputText = '';
+      //var phoneNumber = requestObject.From;
+      //var textArray = requestObject.Body.split(' ');
+      //console.log(textArray);
+      var outputText = requestObject.Body;
 
-      if (masterArray.indexOf(phoneNumber) === -1) {
+      /*if (masterArray.indexOf(phoneNumber) === -1) {
         //Add phoneNumber to the master list of numbers
-      };
+      };*/
       
-      if (textArray[0] === '@help') {
+      /*if (textArray[0] === '@help') {
         //Show a list of commands and brief explanations
       }
 
@@ -89,7 +90,7 @@ var server = http.createServer(function (req,res) {
       else {
         //Return an error
         outputText = 'GrocerySMS does not recognize that command. Use @help if you need a list of commands.';
-      };
+      };*/
 
       res.writeHead(200, {'Content-Type': 'text/xml'});
       res.write('<?xml version="1.0" encoding="UTF-8" ?>');
