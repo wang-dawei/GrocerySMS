@@ -1,5 +1,6 @@
 var http = require('http');
 var url = require('url');
+var qs = require('querystring');
 
 // Twilio Credentials (preset in Heroku configuration)
 var accountSid = process.env.accountSid;
@@ -38,10 +39,12 @@ var server = http.createServer(function (req,res) {
     });
 
     req.on('end', function() {
+      var parseText = qs.parse(tempStr);
+
       res.writeHead(200, {'Content-Type': 'text/xml'});
       res.write('<?xml version="1.0" encoding="UTF-8" ?>');
       res.write('<Response>');
-      res.write('<Message> Your message is: ' + tempStr + '</Message>');
+      res.write('<Message> Your message is: ' + parseText.body + '</Message>');
       res.write('</Response>');
       res.end();
     });
