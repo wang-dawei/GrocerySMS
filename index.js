@@ -35,16 +35,16 @@ var server = http.createServer(function (req,res) {
     var tempStr = ''
 
     req.on('data', function(data) {
-      tempStr += data;
+      tempStr = data.body;
     });
 
     req.on('end', function() {
-      var parseText = qs.parse(tempStr);
+      //var parseText = qs.parse(tempStr);
 
       res.writeHead(200, {'Content-Type': 'text/xml'});
       res.write('<?xml version="1.0" encoding="UTF-8" ?>');
       res.write('<Response>');
-      res.write('<Message> Your message is: ' + parseText.body + '</Message>');
+      res.write('<Message> Your message is: ' + tempStr + '</Message>');
       res.write('</Response>');
       res.end();
     });
