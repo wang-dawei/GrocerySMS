@@ -30,21 +30,21 @@ var server = http.createServer(function (req,res) {
 
   else if (parsedURL.pathname == '/sms') {
     //Handle incoming text messages
-    req.setEncoding('utf8')
+    req.setEncoding('utf8');
 
-    var tempStr = ''
+    var tempStr = '';
 
     //req.on('data', function(data) {
     //  tempStr += data.body.toString();
     //});
 
     req.on('end', function() {
-      var parseText = qs.parse(tempStr);
+      // var parseText = qs.parse(tempStr);
 
       res.writeHead(200, {'Content-Type': 'text/xml'});
       res.write('<?xml version="1.0" encoding="UTF-8" ?>');
       res.write('<Response>');
-      res.write('<Message> Your message is: '/* + parseText.body + */'</Message>');
+      res.write('<Message> Your message is: </Message>');
       res.write('</Response>');
       res.end();
     });
