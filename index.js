@@ -34,9 +34,9 @@ var server = http.createServer(function (req,res) {
 
     var tempStr = '';
 
-    //req.on('data', function(data) {
-    //  tempStr += data.body.toString();
-    //});
+    req.on('data', function(data) {
+      tempStr += data;
+    });
 
     req.on('end', function() {
       // var parseText = qs.parse(tempStr);
