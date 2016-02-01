@@ -52,44 +52,44 @@ var server = http.createServer(function (req,res) {
 
       if (masterArray.indexOf(phoneNumber) === -1) {
         //Add phoneNumber to the master list of numbers
-      }
+      };
       
-      if (textArray[0] == '@help') {
+      if (textArray[0] === '@help') {
         //Show a list of commands and brief explanations
       }
 
-      else if (textArray[0] == '@newlist') {
+      else if (textArray[0] === '@newlist') {
         //Create a new grocery list
       }
 
-      else if (textArray[0] == '@closelist') {
+      else if (textArray[0] === '@closelist') {
         //Close a finished grocery list
       }
 
-      else if (textArray[0] == '@checklist') {
+      else if (textArray[0] === '@checklist') {
         //See items in a grocery list
       }     
 
-      else if (textArray[0] == '@additem') {
+      else if (textArray[0] === '@additem') {
         //Add an item to an existing grocery list
       }
 
-      else if (textArray[0] == '@removeitem') {
+      else if (textArray[0] === '@removeitem') {
         //Remove an item from an existing grocery list
       }
 
-      else if (textArray[0] == '@addnumber') {
+      else if (textArray[0] === '@addnumber') {
         //Add a number to an existing grocery list
       }
 
-      else if (textArray[0] == '@removenumber') {
+      else if (textArray[0] === '@removenumber') {
         //Remove a number from a finished grocery list
       }
 
       else {
         //Return an error
         outputText = 'GrocerySMS does not recognize that command. Use @help if you need a list of commands.';
-      }
+      };
 
       res.writeHead(200, {'Content-Type': 'text/xml'});
       res.write('<?xml version="1.0" encoding="UTF-8" ?>');
