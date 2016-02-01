@@ -21,8 +21,14 @@ var server = http.createServer(function (req,res) {
     res.write('</head>');
     res.write('<body>');
     res.write('<h1>');
-    res.write('Hello World!');
+    res.write('GrocerySMS');
     res.write('</h1>');
+    res.write('<h2>');
+    res.write('(972) 370-5159');
+    res.write('</h2>');
+    res.write('<p>');
+    res.write('Commands:')
+    res.write('</p>');
     res.write('</body>');
     res.write('</html>');
     res.end();
@@ -39,12 +45,56 @@ var server = http.createServer(function (req,res) {
     });
 
     req.on('end', function() {
-      var parseText = qs.parse(tempStr);
-      console.log(tempStr);
+      var requestObject = qs.parse(tempStr);
+      var phoneNumber = requestObject.From;
+      var textArray = requestObject.Body.split(' ');
+      var outputText = '';
+
+      if (masterArray.indexOf(phoneNumber) === -1) {
+        //Add phoneNumber to the master list of numbers
+      }
+      
+      if (textArray[0] == '@help') {
+        //Show a list of commands and brief explanations
+      }
+
+      else if (textArray[0] == '@newlist') {
+        //Create a new grocery list
+      }
+
+      else if (textArray[0] == '@closelist') {
+        //Close a finished grocery list
+      }
+
+      else if (textArray[0] == '@checklist') {
+        //See items in a grocery list
+      }     
+
+      else if (textArray[0] == '@additem') {
+        //Add an item to an existing grocery list
+      }
+
+      else if (textArray[0] == '@removeitem') {
+        //Remove an item from an existing grocery list
+      }
+
+      else if (textArray[0] == '@addnumber') {
+        //Add a number to an existing grocery list
+      }
+
+      else if (textArray[0] == '@removenumber') {
+        //Remove a number from a finished grocery list
+      }
+
+      else {
+        //Return an error
+        outputText = 'GrocerySMS does not recognize that command. Use @help if you need a list of commands.';
+      }
+
       res.writeHead(200, {'Content-Type': 'text/xml'});
       res.write('<?xml version="1.0" encoding="UTF-8" ?>');
       res.write('<Response>');
-      res.write('<Message>Your message is:' + parseText.Body + '</Message>');
+      res.write('<Message>' + outputText + '</Message>');
       res.write('</Response>');
       res.end();
     });
