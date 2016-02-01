@@ -34,7 +34,7 @@ var server = http.createServer(function (req,res) {
 
     var tempStr = ''
 
-    req.on('data', function() {
+    req.on('data', function(data) {
       tempStr += data;
     });
 
