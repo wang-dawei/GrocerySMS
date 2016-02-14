@@ -37,7 +37,7 @@ var server = http.createServer(function (req,res) {
 
   else if (parsedURL.pathname == '/sms') {
     //Handle incoming text messages
-    req.setEncoding('utf8');
+    /*req.setEncoding('utf8');
 
     var tempStr = '';
 
@@ -144,7 +144,7 @@ var server = http.createServer(function (req,res) {
       res.writeHead(200, {'Content-Type': 'text/xml'});
       res.write('<?xml version="1.0" encoding="UTF-8" ?>');
       res.write('<Response>');
-      res.write('<Message>GrocerySMS: ' + outputText + '</Message>');
+      res.write('<Message>GrocerySMS: ' + 'Lupus' + '</Message>');
       res.write('</Response>');
       res.end();
     });
