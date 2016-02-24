@@ -56,12 +56,12 @@ var server = http.createServer(function (req,res) {
       var requestObject = qs.parse(tempStr);
       var phoneNumber = requestObject.From;
       var textArray = requestObject.Body.split(' ');
-      var outputText = '';
+      var outputText = textArray[0];
 
       if (masterArray.indexOf(phoneNumber) === -1) {
         //Add phoneNumber to the master list of numbers
       };
-      switch(textArray[0]){
+      /*switch(textArray[0]){
         case '@help':
           break;
         case '@newlist':
@@ -101,7 +101,7 @@ var server = http.createServer(function (req,res) {
         default:
           outputText = 'GrocerySMS does not recognize that command. Use @help if you need a list of commands.';
           break;
-      };
+      };*/
       /*if (textArray[0] === '@help') {
         //Show a list of commands and brief explanations
       }
