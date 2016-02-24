@@ -1,7 +1,7 @@
 var http = require('http');
 var url = require('url');
 var qs = require('querystring');
-var func = require('./module.js')
+//var func = require('./module.js')
 
 // Twilio Credentials (preset in Heroku configuration)
 var accountSid = process.env.accountSid;
@@ -58,10 +58,10 @@ var server = http.createServer(function (req,res) {
       var textArray = requestObject.Body.split(' ');
       var outputText = textArray[0];
 
-      if (masterArray.indexOf(phoneNumber) === -1) {
+      /*if (masterArray.indexOf(phoneNumber) === -1) {
         //Add phoneNumber to the master list of numbers
       };
-      /*switch(textArray[0]){
+      switch(textArray[0]){
         case '@help':
           break;
         case '@newlist':
