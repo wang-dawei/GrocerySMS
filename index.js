@@ -61,10 +61,12 @@ var server = http.createServer(function (req,res) {
         case '@help':
           break;
         case '@newlist':
-          outputText = func.newList(masterDict,phoneNumber,textArray[1],lists,code);
+          func.newList(masterDict,phoneNumber,textArray[1],lists,code);
+          outputText = textArray[1] + ' has been created.';
           break;
         case '@closelist':
-          outputText = func.clearNumber(masterDict,phoneNumber,textArray[1],lists);
+          func.clearList(masterDict,phoneNumber,textArray[1],lists);
+          outputText = textArray[1] + ' has been deleted.';
           break;
         case '@checklist':
           outputText = func.checkList(masterDict,phoneNumber,textArray[1],lists);
