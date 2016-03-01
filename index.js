@@ -7,6 +7,11 @@ var func = require('./module.js');
 var accountSid = process.env.accountSid;
 var authToken = process.env.authToken;
  
+//Data Structures
+var masterDict = [];
+var lists = [];
+var code = 0;
+
 //require the Twilio module and create a REST client 
 var client = require('twilio')(accountSid, authToken); 
 
@@ -37,7 +42,7 @@ var server = http.createServer(function (req,res) {
 
   else if (parsedURL.pathname == '/sms') {
     //Handle incoming text messages
-    /*req.setEncoding('utf8');
+    req.setEncoding('utf8');
 
     var tempStr = '';
 
@@ -56,95 +61,49 @@ var server = http.createServer(function (req,res) {
         case '@help':
           break;
         case '@newlist':
-          outputText = func.newList(textArray[1],phoneNumber);
+          func.newList(masterDict,phoneNumber,textArray[1],lists,code);
+          outputText = textArray[1] + ' has been created.';
           break;
         case '@closelist':
-          outputText = func.clearNumber(textArray[1],phoneNumber);
+          func.clearList(masterDict,phoneNumber,textArray[1],lists);
+          outputText = textArray[1] + ' has been deleted.';
           break;
         case '@checklist':
-          outputText = func.checkList(textArray[1],phoneNumber);
+          outputText = func.checkList(masterDict,phoneNumber,textArray[1],lists);
           break;
         case '@additem':
           var tempAddItems = '';
-          for(i = 2; i < textArray.length - 1; i++){
-            func.addItem(textArray[1],phoneNumber,textArray[i]);
-            tempAddItems = tempAddItems + textArray[i] + ', ';
+          for(i = 2; i < textArray.length; i++){
+            func.addItem(masterDict,phoneNumber,textArray[1],lists,textArray[i]);
+            tempAddItems = tempAddItems + ', ' + textArray[i];
           };
           outputText = 'Added ' + tempAddItems; 
           break;
         case '@removeitem':
           var tempDelItems = '';
-          for(i = 2; i < textArray.length - 1; i++){
-            func.delItem(textArray[1],phoneNumber,textArray[i]);
-            tempDelItems = tempDelItems + textArray[i] + ', ';
+          for(i = 2; i < textArray.length; i++){
+            func.delItem(masterDict,phoneNumber,textArray[1],lists,textArray[i]);
+            tempDelItems = tempDelItems + ', ' + textArray[i];
           };
           outputText = 'Deleted ' + tempDelItems;
           break;
         case '@addnumber':
           var tempAddNumb = '';
-          for(i = 2; i < textArray.length - 1; i++){
-            func.addNumber(textArray[1],phoneNumber,textArray[i]);
-            tempAddNumb = tempAddNumb + textArray[i] + ', ';
+          for(i = 3; i < textArray.length; i++){
+            func.addNumber(masterDict,phoneNumber,textArray[1],textArray[i],textArray[2]);
+            tempAddNumb = tempAddNumb + ', ' + textArray[i];
           };
           outputText = 'Added ' + tempAddNumb;
-          break;
-        case '@removenumber'
-          var tempDelNumb = '';
-          for(i = 2; i < textArray.length - 1; i++){
-            func.delNumber(textArray[1],phoneNumber,textArray[i]);
-            tempDelNumb = tempDelNumb + textArray[i] + ', ';
-          };
-          outputText = 'Added ' + tempDelNumb;
           break;
         default:
           outputText = 'GrocerySMS does not recognize that command. Use @help if you need a list of commands.';
           break;
       };
-      /*if (masterArray.indexOf(phoneNumber) === -1) {
-        //Add phoneNumber to the master list of numbers
-      };*/
-      
-      /*if (textArray[0] === '@help') {
-        //Show a list of commands and brief explanations
-      }
-
-      else if (textArray[0] === '@newlist') {
-        //Create a new grocery list
-      }
-
-      else if (textArray[0] === '@closelist') {
-        //Close a finished grocery list
-      }
-
-      else if (textArray[0] === '@checklist') {
-        //See items in a grocery list
-      }     
-
-      else if (textArray[0] === '@additem') {
-        //Add an item to an existing grocery list
-      }
-
-      else if (textArray[0] === '@removeitem') {
-        //Remove an item from an existing grocery list
-      }
-
-      else if (textArray[0] === '@addnumber') {
-        //Add a number to an existing grocery list
-      }
-
-      else if (textArray[0] === '@removenumber') {
-        //Remove a number from a finished grocery list
-      }
-
-      else {
-        //Return an error
-        outputText = 'GrocerySMS does not recognize that command. Use @help if you need a list of commands.';
-      };*/
 
       res.writeHead(200, {'Content-Type': 'text/xml'});
       res.write('<?xml version="1.0" encoding="UTF-8" ?>');
       res.write('<Response>');
-      res.write('<Message>GrocerySMS: ' + 'Lupus' + '</Message>');
+      res.write('<Message>GrocerySMS: ' + outputText + '</Message>');
       res.write('</Response>');
       res.end();
     });

@@ -1,79 +1,55 @@
 //module.js
 var exports = module.exports = {};
 
+//Makes a new list
+exports.newList = function(masterDict,number,listName,lists,code){
+	code++;
+
+	lists[code] = [];
+	masterDict[number] = [];
+	masterDict[number][listName] = code;
+};
+
+//Delete lists
+exports.clearList = function(masterDict,number,listName,lists){
+	var code = masterDict[number][listName];
+
+	delete lists[code];
+};
+
 //Checking a list using a code key
-exports.checkList = function(key,code,number){
-	for(i = 0; i < key[code][0].length; i++){
-		if(key[code][0][i] === number){
-			return key[code][1];
-		};
-	};
+exports.checkList = function(masterDict,number,listName,lists){
+	var code = masterDict[number][listName];
+
+	return lists[code];
 };
 
 //Add an item
-exports.addItem = function(key,code,number,item){
-	for(i = 0; i < key[code][0].length; i++){
-		if(key[code][0][i] === number){
-			//Check if item is repeated and lower case them
-			key[code][1].push(item);
-		};
-	};
+exports.addItem = function(masterDict,number,listName,lists,item){
+	var code = masterDict[number][listName];
+
+	lists[code].push(item);
 };
 
 //Delete an item
-exports.deleteItem = function(key,code,number,item){
-	for(i = 0; i < key[code][0].length; i++){
-		if(key[code][0][i] === number){
-			for(j = 0; j < key[code][1].length; j++){
-				if(key[code][1][j] == item){
-					key[code][1].splice(j,1);
-				};
-			};
-		};
-	};
-};
+exports.delItem = function(masterDict,number,listName,lists,item){
+	var code = masterDict[number][listName];
 
-//Clear list
-exports.clearList = function(key,code,number){
-	for(i = 0; i < key[code][0].length; i++){
-		if(key[code][0][i] === number){
-			delete key[code];
-			return 'Deleted';
-		};
-	};
-};
-
-//Add list
-exports.addList = function(key,code,number){
-	for(i = 0; i < key[code][0].length; i++){
-		if(key[code][0].length === 0){
-			key[code][0] = number;
-			return 'Success';
-		}
-		else{
-			return 'Code taken, try again';
+	for(i = 0; i <lists[code].length; i++){
+		if(list[code][i] === item){
+			lists[code].splice(i,1);
 		};
 	};
 };
 
 //Add Number
-exports.addNumber = function(key,code,number,newNum){
-	for(i = 0; i < key[code][0].length; i++){
-		if(key[code][0][i] === number){
-			key[code][0].push(newNum);
-		};
-	};
-};
+exports.addNumber = function(masterDict,origNumber,listName,newNumber,newListName){
+	var code = masterDict[number][listName];
 
-//Remove Number
-exports.delNumber = function(key,code,number,delNum){
-	for(i = 0; i < key[code][0].length; i++){
-		if(key[code][0][i] === number){
-			for(j = 0; j < key[code][0]; j++){
-				if(key[code][0][j] == delNum){
-					key[code][0].splice(j,1);
-				}
-			};
-		};
+	if(masterDict[newNumber] === null){
+		masterDict[newNumber] = [];
+	}
+	else{
+		masterDict[newNumber][newListName] = code;
 	};
 };
