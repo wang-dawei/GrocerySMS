@@ -73,25 +73,25 @@ var server = http.createServer(function (req,res) {
           break;
         case '@additem':
           var tempAddItems = '';
-          for(i = 2; i < textArray.length - 1; i++){
+          for(i = 2; i < textArray.length; i++){
             func.addItem(masterDict,phoneNumber,textArray[1],lists,textArray[i]);
-            tempAddItems = tempAddItems + textArray[i] + ', ';
+            tempAddItems = tempAddItems + ', ' + textArray[i];
           };
           outputText = 'Added ' + tempAddItems; 
           break;
         case '@removeitem':
           var tempDelItems = '';
-          for(i = 2; i < textArray.length - 1; i++){
+          for(i = 2; i < textArray.length; i++){
             func.delItem(masterDict,phoneNumber,textArray[1],lists,textArray[i]);
-            tempDelItems = tempDelItems + textArray[i] + ', ';
+            tempDelItems = tempDelItems + ', ' + textArray[i];
           };
           outputText = 'Deleted ' + tempDelItems;
           break;
         case '@addnumber':
           var tempAddNumb = '';
-          for(i = 3; i < textArray.length - 1; i++){
+          for(i = 3; i < textArray.length; i++){
             func.addNumber(masterDict,phoneNumber,textArray[1],textArray[i],textArray[2]);
-            tempAddNumb = tempAddNumb + textArray[i] + ', ';
+            tempAddNumb = tempAddNumb + ', ' + textArray[i];
           };
           outputText = 'Added ' + tempAddNumb;
           break;
