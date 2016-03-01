@@ -48,7 +48,7 @@ exports.addNumber = function(masterDict,origNumber,listName,newNumber,newListNam
 
 	if(masterDict[newNumber] === null){
 		masterDict[newNumber] = [];
-	};
+	}
 	else{
 		masterDict[newNumber][newListName] = code;
 	};
