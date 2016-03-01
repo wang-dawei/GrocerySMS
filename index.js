@@ -37,7 +37,7 @@ var server = http.createServer(function (req,res) {
 
   else if (parsedURL.pathname == '/sms') {
     //Handle incoming text messages
-    /*req.setEncoding('utf8');
+    req.setEncoding('utf8');
 
     var tempStr = '';
 
@@ -50,7 +50,7 @@ var server = http.createServer(function (req,res) {
       var phoneNumber = requestObject.From;
       var textArray = requestObject.Body.split(' ');
       console.log(textArray);
-      var outputText = requestObject.Body;
+      /*var outputText = requestObject.Body;
 
       switch(textArray[0]){
         case '@help':
@@ -99,52 +99,12 @@ var server = http.createServer(function (req,res) {
         default:
           outputText = 'GrocerySMS does not recognize that command. Use @help if you need a list of commands.';
           break;
-      };
-      /*if (masterArray.indexOf(phoneNumber) === -1) {
-        //Add phoneNumber to the master list of numbers
-      };*/
-      
-      /*if (textArray[0] === '@help') {
-        //Show a list of commands and brief explanations
-      }
-
-      else if (textArray[0] === '@newlist') {
-        //Create a new grocery list
-      }
-
-      else if (textArray[0] === '@closelist') {
-        //Close a finished grocery list
-      }
-
-      else if (textArray[0] === '@checklist') {
-        //See items in a grocery list
-      }     
-
-      else if (textArray[0] === '@additem') {
-        //Add an item to an existing grocery list
-      }
-
-      else if (textArray[0] === '@removeitem') {
-        //Remove an item from an existing grocery list
-      }
-
-      else if (textArray[0] === '@addnumber') {
-        //Add a number to an existing grocery list
-      }
-
-      else if (textArray[0] === '@removenumber') {
-        //Remove a number from a finished grocery list
-      }
-
-      else {
-        //Return an error
-        outputText = 'GrocerySMS does not recognize that command. Use @help if you need a list of commands.';
       };*/
 
       res.writeHead(200, {'Content-Type': 'text/xml'});
       res.write('<?xml version="1.0" encoding="UTF-8" ?>');
       res.write('<Response>');
-      res.write('<Message>GrocerySMS: ' + 'Lupus' + '</Message>');
+      res.write('<Message>GrocerySMS: Hello!</Message>');
       res.write('</Response>');
       res.end();
     });
