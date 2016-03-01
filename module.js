@@ -25,7 +25,7 @@ exports.checkList = function(masterDict,number,listName,lists){
 };
 
 //Add an item
-exports.addItem = function(masterDict,number,listName,lists){
+exports.addItem = function(masterDict,number,listName,lists,item){
 	var code = masterDict[number][listName];
 
 	lists[code].push(item);
