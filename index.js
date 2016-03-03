@@ -59,7 +59,7 @@ var server = http.createServer(function (req,res) {
 
       switch(textArray[0]){
         case '@help':
-          outputText = '@newlist [new list name] \n @closelist [list name] \n @checklist [list name] \n @additem [list name] [item 1] [item 2] ... [final item] \n @removeitem [list name] [item 1] [item 2]...[final item] \n @addnumber [list name] [phone number 1] [phone number 2] ... [final phone number]' ;
+          outputText = '@newlist ListName \n \n @closelist ListName \n \n @checklist ListName \n \n @additem ListName Item1 Item2 ... FinalItem \n \n @removeitem ListName Item1 Item2 ... FinalItem \n \n @addnumber ListName PhoneNumber1 PhoneNumber2 ... FinalPhoneNumber' ;
           break;
         case '@newlist':
           func.newList(masterDict,phoneNumber,textArray[1],lists,code);
