@@ -62,12 +62,10 @@ var server = http.createServer(function (req,res) {
           outputText = '@newlist ListName \n \n @closelist ListName \n \n @checklist ListName \n \n @additem ListName Item1 Item2 ... FinalItem \n \n @removeitem ListName Item1 Item2 ... FinalItem \n \n @addnumber ListName PhoneNumber1 PhoneNumber2 ... FinalPhoneNumber' ;
           break;
         case '@newlist':
-          func.newList(masterDict,phoneNumber,textArray[1],lists,code);
-          outputText = textArray[1] + ' has been created.';
+          outputText = func.newList(masterDict,phoneNumber,textArray[1],lists,code);
           break;
         case '@closelist':
-          func.clearList(masterDict,phoneNumber,textArray[1],lists);
-          outputText = textArray[1] + ' has been deleted.';
+          outputText = func.clearList(masterDict,phoneNumber,textArray[1],lists);
           break;
         case '@checklist':
           outputText = func.checkList(masterDict,phoneNumber,textArray[1],lists);
@@ -75,7 +73,10 @@ var server = http.createServer(function (req,res) {
         case '@additem':
           var tempAddItems = '';
           for(i = 2; i < textArray.length; i++){
-            func.addItem(masterDict,phoneNumber,textArray[1],lists,textArray[i]);
+            outputText = func.addItem(masterDict,phoneNumber,textArray[1],lists,textArray[i]);
+            if(outputText === 'This list does not exist.'){
+              break;
+            };
             tempAddItems = tempAddItems + ' ' + textArray[i];
           };
           outputText = 'Added ' + tempAddItems; 
@@ -83,7 +84,10 @@ var server = http.createServer(function (req,res) {
         case '@removeitem':
           var tempDelItems = '';
           for(i = 2; i < textArray.length; i++){
-            func.delItem(masterDict,phoneNumber,textArray[1],lists,textArray[i]);
+            outputText = func.delItem(masterDict,phoneNumber,textArray[1],lists,textArray[i]);
+            if(outputText === 'This list does not exist.'){
+              break;
+            };
             tempDelItems = tempDelItems + ' ' + textArray[i];
           };
           outputText = 'Deleted ' + tempDelItems;
@@ -91,7 +95,10 @@ var server = http.createServer(function (req,res) {
         case '@addnumber':
           var tempAddNumb = '';
           for(i = 3; i < textArray.length; i++){
-            func.addNumber(masterDict,phoneNumber,textArray[1],textArray[i],textArray[2]);
+            outputText = func.addNumber(masterDict,phoneNumber,textArray[1],textArray[i],textArray[2]);
+            if(outputText === 'This list does not exist.'){
+              break;
+            };
             tempAddNumb = tempAddNumb + ' ' + textArray[i];
           };
           outputText = 'Added ' + tempAddNumb;
