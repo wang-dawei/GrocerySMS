@@ -28,6 +28,8 @@ exports.checkList = function(masterDict,number,listName,lists){
 exports.addItem = function(masterDict,number,listName,lists,item){
 	var code = masterDict[number][listName];
 
+	item = item.toLowerCase();
+
 	lists[code].push(item);
 };
 
